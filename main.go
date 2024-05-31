@@ -26,7 +26,7 @@ func init() {
 	s3Client = InitS3Client()
 	err := godotenv.Load()
 	if err != nil {
-		log.Fatal("Error loading .env file")
+		log.Printf("Error loading .env file")
 	}
 	MONGO_URI := os.Getenv("MONGO_URI")
 	MongoClient, err = mongo.Connect(context.Background(), options.Client().ApplyURI(MONGO_URI))
@@ -58,6 +58,9 @@ func main() {
 	router.HandleFunc("POST /dislike", DislikeSolution)
 
 	handler := cors.Default().Handler(router)
+
+	log.Println("Server running on port 8080")
+
 	log.Fatal(http.ListenAndServe(":8080", handler))
 
 }
