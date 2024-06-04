@@ -72,6 +72,7 @@ func CreateSolution(w http.ResponseWriter, r *http.Request) {
 	// Save solution to MongoDB
 	collection := MongoClient.Database("test").Collection("solutions")
 	solution := Solution{
+		ID:          primitive.NewObjectID(),
 		Username:    username,
 		Email:       email,
 		File_url:    fileURL,
